@@ -97,30 +97,15 @@ Kenny Bania
 
 
 g) Finding Files and Directories
-
 1. Find all the files and directories in the current directory
-$ find
-
 2. Find all the files and directories starting from "etc"
-$ find /etc
-
 3. Using "find" command, find only the directories in the current directory
-$ find -type d
-
 4. Using "find" command, find only the files in the current directory
-$ find -type f
-
 5. Using "find" command, find all the files whose names start with "f" in the current directory
-$ find -type f -name "f*"			# case sensitive
-$ find -type f -iname "f*"			# case insensitive
-
 6. Find all the python files and write the result to a file called pythonfile.txt
-$ find / -type f -name "*.py" > python-files.txt
-$ cat python-files.txt
 
 
 h) Chaining commands
-
 1. Create a directory "test", enter this directory and echo "done" 
 2. Uses the AND / OR operator and the task above
 3. Create a pipe - what comes out of the 1st command, goes inside the second and so on
@@ -128,25 +113,10 @@ h) Chaining commands
 
 
 i) Environment Variables
-
 1. Viewing environment varibales
-$ printenv
-$ printenv PATH
-$ echo $PATH
-
-
 2. Setting and viewing Environment varibales
-$ export DB_USER=mosh 					# this variable is only available in the current terminal session!!!!
-$ printenv DB_USER | echo $DB_USER
-
-
 3. Permanent environment variables must be written inside file ".bashrc" located in the ~ 
-$ echo DB_USER=mosh >> .bashrc   # appending the DB_USER inside .bashrc file
-
-
 4. Reload the .bashrc file - must be reloaded from ~ directory
-$ source .bashrc
-$ source ~/.bashrc   
 
 
 j) Managing Users
