@@ -1,7 +1,7 @@
 Linux Fundamentals 💻🚀
 ===============================
 
-Getting started with Linux with Exercises
+Linux - Exercises & Solutions
 
 
 a) Managing packages - Ubuntu
@@ -13,7 +13,6 @@ $ apt update
 $ apt install nano
 ```
 
-----
 **2. Uninstall the package "nano"**
 ```sh
 $ apt remove nano
@@ -458,10 +457,10 @@ $ source .bashrc
 $ source ~/.bashrc  
 ```
 
-j) Managing Users
+j) Managing Users & Groups
 ----
 
-**1. create the home directory for user "john"**
+**1. create the user "john" with home directory**
 ```sh
 $ useradd -m john
 ```
@@ -483,36 +482,44 @@ $ cat /etc/shadow 					# file only accessible for the root user
 
 **5. Open another terminal and login as John**
 ```sh
-$ docker exec -it -u john 52eb2ec0b5de bash
+$ sudo - john
 ```
 
-k) Managing groups
-----
-**1. Create a new group called "developers" and locate it**
+**6. Create a new group called "developers" and locates it**
 ```sh
 $ groupadd developers
 $ cat /etc/group
 ```
 
-**2. Add "John" to this group and displays john's password**
+**7. Add "John" to this group and displays john's password**
 ```sh
 $ usermod -G developers john
 $ cat /etc/passwd | grep john  OR  grep john /etc/passwd
 ```
 
-**3. Display the groups John is part of**
+**8. Display the groups John is part of**
 ```sh
 $ groups john
 ```
 
-**4. Add John to a new group called "artists"**
+**9. Add John to a new group called "artists"**
 ```sh
 $ groupadd artists
 $ usermod -G artists john
 $ groups john
 ```
 
-l) File Permissions
+**10. Create a new group "superheros". Create a new user "spiderman", give a "bash" shell to him. Create a password for him**
+```sh
+$ groupadd superheros
+$ useradd –g superheros –s /bin/bash –c "Spiderman Character" –m –d 
+/home/spiderman spiderman
+
+$ passwd spiderman 12345
+```
+
+
+k) File Permissions
 ----
 
 **1. create a shell script called "deploy" with a message "echo hello"**
@@ -526,16 +533,146 @@ $ chmod u+x deploy.sh
 $ ./deploy.sh
 ```
 
-
-
-****
+l) System Administration
+----
+Create a file named "my-group" with the following content below:
+```
+Jerry Seinfeld
+Cosmo Kramer
+Eliane Benes
+George Costanza
+Newman mailman
+Frank Costanza
+Morty Seinfeld
+Babes Kramer
+Alton Benes
+J Peterman
+George Steinbrenner
+Uncel Leo
+David Puddy
+Justin Pitt
+Kenny Bania
+```
+**1. Replace the word "Kenny" to "Alain"**
 ```sh
+$ sed 's/Kenny/Alain/g' my-group  		# it only prints the changing
+$ sed -i 's/Kenny/Alain/g' my-group  	# it inserts the changing into the original file
 ```
 
-----
+**2. Replace the word "Costanza" with ab empty string**
+```sh
+$ sed 's/Costanza//g' my-group 
+```
+
+**3. Delete every line that have the word "Seinfeld"**
+```sh
+$ sed '/Seinfeld/d' my-group
+```
+
+**4. Remove empty lines from the file**
+```sh
+$ sed '/^$/d' my-group
+```
+
+**5. Remove the first line of the file**
+```sh
+$ sed '1d' my-group
+```
+
+**6. Remove the first two lines of the file**
+```sh
+$ sed '1,2d' my-group
+```
+
+**7. Replace all "tabs" with spaces**
+```sh
+$ sed 's/\t/ /g' my-group
+```
+
+**8. Replace any spaces in file with "tabs"**
+```sh
+$ sed 's/ /\t/g' my-group
+```
+
+**9. Displays all the lines starting with "J Peterman" all the way till the end**
+```sh
+$ sed -n 12,18p my-group
+```
+
+**10. Displays all the lines except line 12 to 18**
+```sh
+$ sed 12,18d my-group
+```
+
+**11. Add a space after every line**
+```sh
+$ sed G my-group
+```
+
+**12. Replace the word "Seinfeld" with word "S" expect the 7th line**
+```sh
+$ sed '8!s/my-group/S/g' my-group
+```
+
+**13. By means of "vi" text editor, replace the word "Seinfeld" with the word "Peter"**
+```sh
+$ vi my-group
+$ :%s/Seinfeld/Peter
+```
+
+**14. Log in as root and check the status of firewall**
+```sh
+$ systemctl status firewalld.service
+```
+
+**15. Stop the firewall service**
+```sh
+$ systemctl stop firewalld.service 
+```
+
+**16. Disable the firewall service / start at boot time**
+```sh
+$ systemctl disable firewalld
+```
+
+**17. Get the list of available services**
+```sh
+$ systemctl list-units
+$ systemctl list-units --all
+```
+systemctl enable servicename.service
+systemctl restart|reload servicename.service
+
+**18. By means of "crontab" command create a scheduled task for 16:00. The task is the following: echo “This is my first crontab entry” > crontab-entry**
+```sh
+$ crontab -e
+$ 21 16 * 10 * echo "This is my first crontab entry" > crontab-entry
+```
+```sh
+[Minute] [Hour] [Day_of_the_Month] [Month_of_the_Year] [Day_of_the_Week] [command]
+# 21 -> min;
+# 16 -> hour; 
+#  * -> day of the month (1-12): everyday; 
+# 10 -> month: october(10); 
+#  * -> day of week (1-7)
+```
+
+**19. By means of "at" command create a scheduled task for 16:45. The task is the following: echo “This is my first crontab entry” > crontab-entry**
+```sh
+$ at 4:45PM
+$ echo “This is my first at entry” > at-entry
+$ CTRL+D
+```
+
+
+# Commands to review - Module 5
+```sh
+$ chage [-d lastday] [-m mindays] [-M maxdays] [-W warndays] [-I 
+inactive] [-E expiredate] user
+```
 
 
 Reference
 ----
-[link 1 ](https://www.kaggle.com/)
+[Linux Tutorials Point ](https://www.kaggle.com/) </br>
 [Wildcards](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm)
