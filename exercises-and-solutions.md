@@ -1,8 +1,5 @@
-Linux Fundamentals 💻🚀
+Exercises and Solutions
 ===============================
-
-Linux - Exercises & Solutions
-
 
 a) Managing packages - Ubuntu
 ----
